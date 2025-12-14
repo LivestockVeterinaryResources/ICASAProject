@@ -1,17 +1,31 @@
 [
   {
+    "objectID": "Methods.html",
+    "href": "Methods.html",
+    "title": "About",
+    "section": "",
+    "text": "Detailed methods (page under construction)"
+  },
+  {
+    "objectID": "About.html",
+    "href": "About.html",
+    "title": "About",
+    "section": "",
+    "text": "Info about the ICASA project (page under construction)"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Beef Feedlot Antimicrobial Use",
     "section": "",
-    "text": "A little bit about the ICASA project"
+    "text": "This link explores feedlot antimicrobial use accross 8 feedyards using different metrics\nbutton: explore metrics"
   },
   {
     "objectID": "index.html#amu-metrics",
     "href": "index.html#amu-metrics",
     "title": "Beef Feedlot Antimicrobial Use",
-    "section": "Antimicrobial Use Metrics",
-    "text": "Antimicrobial Use Metrics\nThis link explores feedlot antimicrobial use accross 8 feedyards using different metrics\nbutton: explore metrics"
+    "section": "",
+    "text": "This link explores feedlot antimicrobial use accross 8 feedyards using different metrics\nbutton: explore metrics"
   },
   {
     "objectID": "index.html#amu-outcomes",
@@ -24,7 +38,7 @@
     "objectID": "index.html#amu-econ",
     "href": "index.html#amu-econ",
     "title": "Beef Feedlot Antimicrobial Use",
-    "section": "Intervention Exonomics",
-    "text": "Intervention Exonomics\nThis report explores the economics associated with interventions given basic disease information early in the feeding period.\nbutton: intervention economics"
+    "section": "Intervention Economics",
+    "text": "Intervention Economics\nThis report explores the economics associated with interventions given basic disease information early in the feeding period.\nbutton: intervention economics"
   }
 ]

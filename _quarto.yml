@@ -10,7 +10,7 @@ website:
     title: 'ICASA Project'
     tools: 
       - icon: github
-        href: https://github.com/LivestockVeterinaryResources/ICASAFeedlotAMUReports
+        href: https://github.com/damrine/ICASA-anonymous
     left:
       - text: Home
         href: index.qmd
@@ -25,7 +25,7 @@ format:
   html:
     #backgroundcolor: '#7570b3'
     #fontcolor: '#542788'
-    #link-color: 'white'
+    link-color: 'black'
     #mainfont: serif
     theme: [pulse, styles.scss]
 

@@ -2,3 +2,6 @@
 title: "About"
 
 ---
+
+
+Info about the ICASA project (page under construction)

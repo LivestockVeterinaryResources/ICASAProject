@@ -10,7 +10,7 @@ about: # https://quarto.org/docs/websites/website-about.html
       href: https://github.com/LivestockVeterinaryResources/ICASAFeedlotAMUReports
 ---
 
-A little bit about the ICASA project
+
 
 ## [Antimicrobial Use Metrics](https://www.shinyapps.io) {#amu-metrics}
 
@@ -24,7 +24,7 @@ This link explores the outcomes associated with disease therapies (therapeutic e
 
 button: learn more about the definition of a Theraputic Event
 
-## [Intervention Exonomics](https://www.shinyapps.io) {#amu-econ}
+## [Intervention Economics](https://www.shinyapps.io) {#amu-econ}
 
 This report explores the economics associated with interventions given basic disease information early in the feeding period.
 

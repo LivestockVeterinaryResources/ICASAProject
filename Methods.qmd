@@ -2,3 +2,5 @@
 title: "About"
 
 ---
+
+Detailed methods (page under construction)
