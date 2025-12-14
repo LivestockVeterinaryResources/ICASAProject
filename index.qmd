@@ -1,0 +1,31 @@
+---
+title: "Beef Feedlot \n Antimicrobial Use"
+subtitle: ""
+image: images/ICASAlogo.jpg
+about: # https://quarto.org/docs/websites/website-about.html
+  template: trestles
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/LivestockVeterinaryResources/ICASAFeedlotAMUReports
+---
+
+A little bit about the ICASA project
+
+## [Antimicrobial Use Metrics](https://www.shinyapps.io) {#amu-metrics}
+
+This link explores feedlot antimicrobial use accross 8 feedyards using different metrics
+
+button: explore metrics
+
+## [Therapeutic Outcomes](https://www.shinyapps.io) {#amu-outcomes}
+
+This link explores the outcomes associated with disease therapies (therapeutic events) in the reporting feedyards
+
+button: learn more about the definition of a Theraputic Event
+
+## [Intervention Exonomics](https://www.shinyapps.io) {#amu-econ}
+
+This report explores the economics associated with interventions given basic disease information early in the feeding period.
+
+button: intervention economics

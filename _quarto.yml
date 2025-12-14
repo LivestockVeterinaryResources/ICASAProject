@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Home"
+  open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
+  page-footer: "Questions about this project? email: mapley@k-state.edu"
+  navbar:
+    title: 'ICASA Project'
+    tools: 
+      - icon: github
+        href: https://github.com/LivestockVeterinaryResources/ICASAFeedlotAMUReports
+    left:
+      - text: Home
+        href: index.qmd
+    right:
+      - text: About
+        href: About.qmd
+      - text: Methods
+        href: Methods.qmd
+        
+      
+format:
+  html:
+    #backgroundcolor: '#7570b3'
+    #fontcolor: '#542788'
+    #link-color: 'white'
+    #mainfont: serif
+    theme: [pulse, styles.scss]
+
