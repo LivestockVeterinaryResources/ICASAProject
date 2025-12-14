@@ -13,7 +13,10 @@ about: # https://quarto.org/docs/websites/website-about.html
 
   
 
-## [Antimicrobial Use Metrics](https://lvr-explore.shinyapps.io/ICASA_AMUMetrics_Anonymous/) {#amu-metrics}
+## <a href="https://lvr-explore.shinyapps.io/ICASA_AMUMetrics_Anonymous/" target="_blank" rel="noopener">
+Antimicrobial Use Metrics
+</a> {#amu-metrics}
+
 
 This link explores feedlot antimicrobial use accross 8 feedyards using different metrics
 
