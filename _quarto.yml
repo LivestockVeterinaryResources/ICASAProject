@@ -25,7 +25,7 @@ format:
   html:
     #backgroundcolor: '#7570b3'
     #fontcolor: '#542788'
-    link-color: 'black'
+    linkcolor: "black"
     #mainfont: serif
     theme: [pulse, styles.scss]
 
