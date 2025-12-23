@@ -17,16 +17,15 @@ about: # https://quarto.org/docs/websites/website-about.html
 
 This link explores feedlot antimicrobial use accross 8 feedyards using different metrics
 
-button: explore metrics
+
 
 ## [Therapeutic Outcomes](https://lvr-explore.shinyapps.io/ICASAMorbidityParameters/) {#amu-outcomes}
 
 This link explores the outcomes associated with disease therapies (therapeutic events) in the reporting feedyards
 
-button: learn more about the definition of a Theraputic Event
+
 
 ## [Intervention Economics](https://lvr-explore.shinyapps.io/ICASA_Econ/) {#amu-econ}
 
 This report explores the economics associated with interventions given basic disease information early in the feeding period.
 
-button: intervention economics
