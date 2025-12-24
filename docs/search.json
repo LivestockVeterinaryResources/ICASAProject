@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Beef Feedlot Antimicrobial Use",
     "section": "",
-    "text": "Antimicrobial Use Metrics  {#amu-metrics}\nThis link explores feedlot antimicrobial use accross 8 feedyards using different metrics\nbutton: explore metrics"
+    "text": "This link explores feedlot antimicrobial use accross 8 feedyards using different metrics"
   },
   {
     "objectID": "index.html#section",
@@ -32,13 +32,20 @@
     "href": "index.html#amu-outcomes",
     "title": "Beef Feedlot Antimicrobial Use",
     "section": "Therapeutic Outcomes",
-    "text": "Therapeutic Outcomes\nThis link explores the outcomes associated with disease therapies (therapeutic events) in the reporting feedyards\nbutton: learn more about the definition of a Theraputic Event"
+    "text": "Therapeutic Outcomes\nThis link explores the outcomes associated with disease therapies (therapeutic events) in the reporting feedyards"
   },
   {
     "objectID": "index.html#amu-econ",
     "href": "index.html#amu-econ",
     "title": "Beef Feedlot Antimicrobial Use",
     "section": "Intervention Economics",
-    "text": "Intervention Economics\nThis report explores the economics associated with interventions given basic disease information early in the feeding period.\nbutton: intervention economics"
+    "text": "Intervention Economics\nThis report explores the economics associated with interventions given basic disease information early in the feeding period."
+  },
+  {
+    "objectID": "index.html#amu-metrics",
+    "href": "index.html#amu-metrics",
+    "title": "Beef Feedlot Antimicrobial Use",
+    "section": "",
+    "text": "This link explores feedlot antimicrobial use accross 8 feedyards using different metrics"
   }
 ]

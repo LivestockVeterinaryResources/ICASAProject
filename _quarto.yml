@@ -11,10 +11,9 @@ website:
     tools: 
       - icon: github
         href: https://github.com/damrine/ICASA-anonymous
-    left:
+    right:
       - text: Home
         href: index.qmd
-    right:
       - text: About
         href: About.qmd
       - text: Methods
@@ -25,7 +24,7 @@ format:
   html:
     #backgroundcolor: '#7570b3'
     #fontcolor: '#542788'
-    linkcolor: "black"
+    linkcolor: "purple"
     #mainfont: serif
     theme: [pulse, styles.scss]
 
