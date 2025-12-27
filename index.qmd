@@ -13,13 +13,13 @@ about: # https://quarto.org/docs/websites/website-about.html
 
   
 
-## [Antimicrobial Use Metrics](https://lvr-explore.shinyapps.io/ICASA_AMUMetrics_Anonymous/) {#amu-metrics}
+## [Antimicrobial Use Metrics](https://lvr-explore.shinyapps.io/ICASA_FeedlotMetrics/) {#amu-metrics}
 
 This link explores feedlot antimicrobial use accross 8 feedyards using different metrics
 
 
 
-## [Therapeutic Outcomes](https://lvr-explore.shinyapps.io/ICASAMorbidityParameters/) {#amu-outcomes}
+## [Therapeutic Outcomes](https://lvr-explore.shinyapps.io/ICASA_Disease/) {#amu-outcomes}
 
 This link explores the outcomes associated with disease therapies (therapeutic events) in the reporting feedyards
 
