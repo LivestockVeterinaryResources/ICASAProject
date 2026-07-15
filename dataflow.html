@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICASA Data Flow Map</title>
+<style>
+  :root {
+    --slate:#34495E; --slate-d:#26333F; --copper:#C0693B;
+    --ground:#EEF1F4; --card:#FFFFFF; --card-2:#F7F9FB;
+    --ink:#1F2937; --muted:#64748B; --border:#D9E0E8; --hair:#E5E9EF;
+    --live:#2F7D5B; --live-bg:#E4F1EA; --hosted:#3E6B75; --hosted-bg:#E2EEF0;
+    --aside:#94A3B8;
+    --mono: ui-monospace,"Cascadia Code","Segoe UI Mono","SF Mono",Menlo,Consolas,monospace;
+    --sans: system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --slate:#5B7185; --slate-d:#8CA0B4; --copper:#D98B63;
+      --ground:#161C23; --card:#212B35; --card-2:#1A222B;
+      --ink:#E5EAF0; --muted:#93A2B3; --border:#33414F; --hair:#2A3540;
+      --live:#5FBF92; --live-bg:#17301F; --hosted:#7FB3BE; --hosted-bg:#16292E;
+      --aside:#6B7A8C;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+       line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 22px 80px;}
+
+  .kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);
+          font-weight:700;margin:0 0 6px;}
+  h1{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.08;margin:0 0 10px;
+     letter-spacing:-.02em;color:var(--ink);font-weight:800;}
+  .lede{max-width:66ch;color:var(--muted);font-size:1.02rem;margin:0 0 24px;}
+  .lede b{color:var(--ink);font-weight:650;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px 18px;padding:13px 16px;background:var(--card);
+          border:1px solid var(--border);border-radius:12px;margin-bottom:20px;font-size:.82rem;}
+  .legend .li{display:flex;align-items:center;gap:8px;color:var(--muted);}
+  .dot{width:11px;height:11px;border-radius:3px;flex:none;}
+  .swatch-arrow{width:22px;height:0;border-top:2px solid var(--copper);position:relative;flex:none;}
+  .swatch-arrow::after{content:"";position:absolute;right:-1px;top:-4px;border:4px solid transparent;
+                       border-left-color:var(--copper);}
+  .swatch-dash{width:20px;height:12px;border:1.5px dashed var(--aside);border-radius:3px;flex:none;}
+
+  .diagram{background:#FBFCFD;border:1px solid #D9E0E8;border-radius:16px;
+           padding:14px 10px 6px;overflow-x:auto;box-shadow:0 1px 3px rgba(15,23,42,.05);}
+  .diagram pre.mermaid{margin:0;text-align:center;min-width:760px;background:transparent;border:0;}
+  .dcap{font-size:.8rem;color:var(--muted);margin:10px 2px 30px;display:flex;
+        align-items:center;gap:8px;flex-wrap:wrap;}
+  .dcap b{color:var(--ink);}
+
+  h2.sec{font-size:1.06rem;font-weight:750;letter-spacing:-.01em;margin:34px 0 4px;}
+  .sec-sub{color:var(--muted);font-size:.86rem;margin:0 0 14px;}
+
+  .chips-row{display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;flex-wrap:wrap;}
+  .chips-lbl{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+             font-weight:700;padding-top:4px;flex:none;width:170px;}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;}
+  .chip{font-family:var(--mono);font-size:.75rem;background:var(--card);border:1px solid var(--border);
+        border-radius:6px;padding:3px 8px;color:var(--ink);}
+  .chip .a{color:var(--copper);}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:760px){.cards3{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;
+        padding:14px 15px 15px;position:relative;overflow:hidden;}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--hosted);}
+  .card .repo{font-family:var(--mono);font-size:.9rem;font-weight:700;}
+  .card .sub{font-size:.8rem;color:var(--muted);margin:2px 0 10px;}
+  .grp-t{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+         font-weight:700;margin:0 0 6px;}
+  ul.files{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;}
+  ul.files li{font-family:var(--mono);font-size:.75rem;color:var(--ink);
+              background:var(--card-2);border:1px solid var(--hair);border-radius:6px;
+              padding:3px 8px;line-height:1.35;word-break:break-word;}
+
+  .caveat{margin-top:30px;font-size:.8rem;color:var(--muted);background:var(--card-2);
+          border:1px dashed var(--border);border-radius:10px;padding:12px 14px;}
+  footer{margin-top:26px;color:var(--muted);font-size:.76rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">ICASA · Beef Feedlot Antimicrobial Use</p>
+  <h1>Data flow map</h1>
+  <p class="lede">How the numbers reach the site. Data moves in the direction of the
+    <b>copper arrows</b>: raw feedyard files → the <b>ICASA</b> processing pipeline →
+    the anonymized <b>ICASA-anonymous</b> engine → three Shiny apps → three published apps on
+    shinyapps.io → the <b>ICASAProject</b> website. Boxes with no arrows are project folders
+    that sit outside the live pipeline.</p>
+
+  <div class="legend" aria-label="legend">
+    <span class="li"><span class="swatch-arrow"></span>data-flow direction</span>
+    <span class="li"><span class="dot" style="background:var(--slate)"></span>source pipeline</span>
+    <span class="li"><span class="dot" style="background:var(--live)"></span>live / current</span>
+    <span class="li"><span class="dot" style="background:var(--hosted)"></span>published app</span>
+    <span class="li"><span class="swatch-dash"></span>outside the live pipeline</span>
+  </div>
+
+  <div class="diagram">
+    <pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontFamily':'system-ui, Segoe UI, sans-serif','fontSize':'13px','lineColor':'#C0693B','edgeLabelBackground':'#FBFCFD'},'flowchart':{'curve':'basis','nodeSpacing':40,'rankSpacing':52,'padding':8,'useMaxWidth':true}}}%%
+flowchart TD
+  RAW[/"raw feedyard files<br/>DataOriginal/ · SampleData/"/]:::raw
+  ICASA["<b>ICASA</b> — source repo<br/>Steps 1–5 · MasterDataProcessing.R"]:::source
+  ANON["<b>ICASA-anonymous</b> — active engine<br/>Steps 3 &amp; 5 + CreateFilesForShiny*<br/>MasterDataProcessing_Anonymous.R"]:::engine
+
+  APP1["<b>ShinyMetrics_Anonymous</b><br/>app_metrics.R"]:::app
+  APP2["<b>shinyMorbidityParameters</b><br/>app3.R"]:::app
+  APP3["<b>ShinyExportsPredict</b><br/>app.R"]:::app
+
+  H1(["ICASA_FeedlotMetrics"]):::hosted
+  H2(["ICASA_Disease"]):::hosted
+  H3(["ICASA_Econ"]):::hosted
+
+  SITE["<b>ICASAProject</b> — website<br/>index.qmd links all three"]:::live
+
+  RAW --> ICASA
+  ICASA -->|"anonymized handoff<br/>(intentional break)"| ANON
+  ANON --> APP1
+  ANON --> APP2
+  ANON --> APP3
+  APP1 -->|deploy| H1
+  APP2 -->|deploy| H2
+  APP3 -->|deploy| H3
+  H1 -->|"AMU Metrics"| SITE
+  H2 -->|"Therapeutic Outcomes"| SITE
+  H3 -->|"Intervention Economics"| SITE
+
+  subgraph DEAD ["Project folders outside the live pipeline"]
+    direction LR
+    D1["<b>ICASA_Website</b><br/>local working copy"]:::aside
+    D2["<b>ICASAFeedlotAMUReports</b><br/>earlier website draft"]:::aside
+    D3["<b>ICASA_ShinyApps</b><br/>app scaffold (in progress)"]:::aside
+  end
+
+  classDef raw fill:#EEF1F4,stroke:#94A3B8,color:#334155,stroke-width:1px;
+  classDef source fill:#34495E,stroke:#26333F,color:#ffffff,stroke-width:1px;
+  classDef engine fill:#E4F1EA,stroke:#2F7D5B,color:#123322,stroke-width:2px;
+  classDef app fill:#FFFFFF,stroke:#34495E,color:#1F2937,stroke-width:1.5px;
+  classDef hosted fill:#E2EEF0,stroke:#3E6B75,color:#12333A,stroke-width:1.5px;
+  classDef live fill:#2F7D5B,stroke:#215C42,color:#ffffff,stroke-width:2px;
+  classDef aside fill:#EEF1F4,stroke:#94A3B8,color:#475569,stroke-width:1.3px,stroke-dasharray:5 4;
+  style DEAD fill:#F4F6F8,stroke:#94A3B8,stroke-width:1.3px,stroke-dasharray:6 5,color:#475569;
+    </pre>
+  </div>
+  <p class="dcap"><span class="swatch-arrow"></span><b>Copper arrows show the direction data moves.</b>
+    The dashed box holds project folders that are not part of the live data flow.</p>
+
+  <h2 class="sec">Pipeline scripts, in run order</h2>
+  <p class="sec-sub">The files each master script renders or sources.</p>
+  <div class="chips-row">
+    <span class="chips-lbl">ICASA<br>MasterDataProcessing.R</span>
+    <span class="chips">
+      <span class="chip">Step1_OriginalData_04.Rmd</span>
+      <span class="chip">Step1.1_OriginalFeedData_03.Rmd</span>
+      <span class="chip">Step2_Wrangle_004.Rmd</span>
+      <span class="chip">Step2.5_WrangleWeightData.Rmd</span>
+      <span class="chip">Step4_purchase_data.Rmd</span>
+      <span class="chip">Step3_Granular_003.Rmd</span>
+      <span class="chip">Step5_outcomes.Rmd</span>
+      <span class="chip">Step5_1_count_animals.Rmd</span>
+    </span>
+  </div>
+  <div class="chips-row">
+    <span class="chips-lbl">ICASA-anonymous<br>MasterDataProcessing_Anonymous.R</span>
+    <span class="chips">
+      <span class="chip">Step3_Granular_003_anonymous.Rmd</span>
+      <span class="chip"><span class="a">▶</span> CreateFilesForShinyOutcomes_V2.R</span>
+      <span class="chip"><span class="a">▶</span> CreateFilesForShinyOutcomesYardYearWt_notLot.R</span>
+      <span class="chip">Step5_outcomes_anonymous.Rmd</span>
+      <span class="chip">Step5_1_count_animals_anonymous.Rmd</span>
+    </span>
+  </div>
+
+  <h2 class="sec">What each app reads</h2>
+  <p class="sec-sub">Data files loaded by the deployed primary document of each app.</p>
+  <div class="cards3">
+    <div class="card">
+      <div class="repo">ShinyMetrics_Anonymous</div>
+      <div class="sub">→ ICASA_FeedlotMetrics · app_metrics.R</div>
+      <p class="grp-t">Reads</p>
+      <ul class="files">
+        <li>df_wrangle_lot_filtered_with_wt_out.rds</li>
+        <li>deno_yardyear_long.rds</li>
+        <li>regimens_yardyear_long.rds</li>
+        <li>master_regimens_long.rds</li>
+        <li>get_expected_doses.csv</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="repo">shinyMorbidityParameters</div>
+      <div class="sub">→ ICASA_Disease · app3.R</div>
+      <p class="grp-t">Reads</p>
+      <ul class="files">
+        <li>data/lots_for_outcomes.rds</li>
+        <li>tx3_for_shiny.rds</li>
+        <li>DataStep2_Anonymous/external/deads_all.rds</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="repo">ShinyExportsPredict</div>
+      <div class="sub">→ ICASA_Econ · app.R</div>
+      <p class="grp-t">Reads</p>
+      <ul class="files">
+        <li>data/lots_with_dof_morb_mort_rail.rds</li>
+        <li>dashboard_payload.rds</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="caveat">The <b>ICASA → ICASA-anonymous</b> step is an intentional break in the chain: it
+    anonymizes the original feedyard data before anything is published. Every repo, script, and
+    data-file name shown was taken directly from the project sources.</div>
+  <footer>ICASA · Beef Feedlot Antimicrobial Use — data-flow overview</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('load', function(){
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+      mermaid.run({ querySelector: 'pre.mermaid' });
+    }
+  });
+</script>
+</body>
+</html>
