@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "Methods.html",
-    "href": "Methods.html",
-    "title": "Methods",
-    "section": "",
-    "text": "Detailed methods (page under construction)"
-  },
-  {
-    "objectID": "About.html",
-    "href": "About.html",
-    "title": "About",
-    "section": "",
-    "text": "Info about the ICASA project (page under construction)"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Beef Feedlot Antimicrobial Use",
@@ -40,5 +26,19 @@
     "title": "Beef Feedlot Antimicrobial Use",
     "section": "Intervention Economics",
     "text": "Intervention Economics\nThis report explores the economics associated with interventions given basic disease information early in the feeding period."
+  },
+  {
+    "objectID": "About.html",
+    "href": "About.html",
+    "title": "About",
+    "section": "",
+    "text": "Info about the ICASA project (page under construction)"
+  },
+  {
+    "objectID": "Methods.html",
+    "href": "Methods.html",
+    "title": "Methods",
+    "section": "",
+    "text": "Detailed methods (page under construction)"
   }
 ]
