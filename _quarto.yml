@@ -20,6 +20,8 @@ website:
         href: About.qmd
       - text: Methods
         href: Methods.qmd
+      - text: Data Flow
+        href: dataflow.html
         
       
 format:
