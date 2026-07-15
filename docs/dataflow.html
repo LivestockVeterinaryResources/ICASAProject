@@ -6,21 +6,19 @@
 <title>ICASA Data Flow Map</title>
 <style>
   :root {
-    --slate:#34495E; --slate-d:#26333F; --copper:#C0693B;
+    --slate:#34495E; --copper:#C0693B;
     --ground:#EEF1F4; --card:#FFFFFF; --card-2:#F7F9FB;
     --ink:#1F2937; --muted:#64748B; --border:#D9E0E8; --hair:#E5E9EF;
-    --live:#2F7D5B; --live-bg:#E4F1EA; --hosted:#3E6B75; --hosted-bg:#E2EEF0;
-    --aside:#94A3B8;
+    --live:#2F7D5B; --hosted:#3E6B75; --aside:#94A3B8;
     --mono: ui-monospace,"Cascadia Code","Segoe UI Mono","SF Mono",Menlo,Consolas,monospace;
     --sans: system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --slate:#5B7185; --slate-d:#8CA0B4; --copper:#D98B63;
+      --slate:#5B7185; --copper:#D98B63;
       --ground:#161C23; --card:#212B35; --card-2:#1A222B;
       --ink:#E5EAF0; --muted:#93A2B3; --border:#33414F; --hair:#2A3540;
-      --live:#5FBF92; --live-bg:#17301F; --hosted:#7FB3BE; --hosted-bg:#16292E;
-      --aside:#6B7A8C;
+      --live:#5FBF92; --hosted:#7FB3BE; --aside:#6B7A8C;
     }
   }
   *{box-sizing:border-box;}
@@ -45,8 +43,8 @@
   .swatch-dash{width:20px;height:12px;border:1.5px dashed var(--aside);border-radius:3px;flex:none;}
 
   .diagram{background:#FBFCFD;border:1px solid #D9E0E8;border-radius:16px;
-           padding:14px 10px 6px;overflow-x:auto;box-shadow:0 1px 3px rgba(15,23,42,.05);}
-  .diagram pre.mermaid{margin:0;text-align:center;min-width:760px;background:transparent;border:0;}
+           padding:16px 12px;overflow-x:auto;box-shadow:0 1px 3px rgba(15,23,42,.05);}
+  .diagram svg{display:block;margin:0 auto;width:100%;min-width:660px;max-width:900px;height:auto;}
   .dcap{font-size:.8rem;color:var(--muted);margin:10px 2px 30px;display:flex;
         align-items:center;gap:8px;flex-wrap:wrap;}
   .dcap b{color:var(--ink);}
@@ -100,51 +98,124 @@
   </div>
 
   <div class="diagram">
-    <pre class="mermaid">
-%%{init: {'theme':'base','themeVariables':{'fontFamily':'system-ui, Segoe UI, sans-serif','fontSize':'13px','lineColor':'#C0693B','edgeLabelBackground':'#FBFCFD'},'flowchart':{'curve':'basis','nodeSpacing':40,'rankSpacing':52,'padding':8,'useMaxWidth':true}}}%%
-flowchart TD
-  RAW[/"raw feedyard files<br/>DataOriginal/ · SampleData/"/]:::raw
-  ICASA["<b>ICASA</b> — source repo<br/>Steps 1–5 · MasterDataProcessing.R"]:::source
-  ANON["<b>ICASA-anonymous</b> — active engine<br/>Steps 3 &amp; 5 + CreateFilesForShiny*<br/>MasterDataProcessing_Anonymous.R"]:::engine
+    <svg viewBox="0 0 900 762" role="img"
+         aria-label="ICASA data flow: raw feedyard files to ICASA pipeline to ICASA-anonymous engine to three Shiny apps to three shinyapps.io apps to the ICASAProject website; three project folders sit outside the live pipeline"
+         xmlns="http://www.w3.org/2000/svg"
+         font-family="system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">
+      <defs>
+        <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3.2"
+                orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#C0693B"/>
+        </marker>
+      </defs>
 
-  APP1["<b>ShinyMetrics_Anonymous</b><br/>app_metrics.R"]:::app
-  APP2["<b>shinyMorbidityParameters</b><br/>app3.R"]:::app
-  APP3["<b>ShinyExportsPredict</b><br/>app.R"]:::app
+      <!-- arrows (drawn under boxes) -->
+      <g stroke="#C0693B" stroke-width="2" fill="none" marker-end="url(#ah)">
+        <line x1="450" y1="66"  x2="450" y2="101"/>
+        <line x1="450" y1="156" x2="450" y2="197"/>
+        <line x1="450" y1="266" x2="170" y2="319"/>
+        <line x1="450" y1="266" x2="450" y2="319"/>
+        <line x1="450" y1="266" x2="730" y2="319"/>
+        <line x1="150" y1="380" x2="150" y2="427"/>
+        <line x1="450" y1="380" x2="450" y2="427"/>
+        <line x1="750" y1="380" x2="750" y2="427"/>
+        <line x1="150" y1="474" x2="352" y2="529"/>
+        <line x1="450" y1="474" x2="450" y2="529"/>
+        <line x1="750" y1="474" x2="548" y2="529"/>
+      </g>
 
-  H1(["ICASA_FeedlotMetrics"]):::hosted
-  H2(["ICASA_Disease"]):::hosted
-  H3(["ICASA_Econ"]):::hosted
+      <!-- edge labels -->
+      <g font-size="11" fill="#8A4A2B">
+        <rect x="462" y="163" width="150" height="15" fill="#FBFCFD"/>
+        <text x="466" y="174">anonymized handoff</text>
+        <rect x="462" y="179" width="150" height="15" fill="#FBFCFD"/>
+        <text x="466" y="190">(intentional break)</text>
+      </g>
+      <g font-size="10" fill="#8A4A2B" text-anchor="middle">
+        <rect x="128" y="396" width="44" height="15" fill="#FBFCFD"/><text x="150" y="407">deploy</text>
+        <rect x="428" y="396" width="44" height="15" fill="#FBFCFD"/><text x="450" y="407">deploy</text>
+        <rect x="728" y="396" width="44" height="15" fill="#FBFCFD"/><text x="750" y="407">deploy</text>
+      </g>
+      <g font-size="10.5" fill="#8A4A2B" text-anchor="middle">
+        <rect x="206" y="495" width="80"  height="15" fill="#FBFCFD"/><text x="246" y="506">AMU Metrics</text>
+        <rect x="386" y="483" width="128" height="15" fill="#FBFCFD"/><text x="450" y="494">Therapeutic Outcomes</text>
+        <rect x="582" y="495" width="136" height="15" fill="#FBFCFD"/><text x="650" y="506">Intervention Economics</text>
+      </g>
 
-  SITE["<b>ICASAProject</b> — website<br/>index.qmd links all three"]:::live
+      <!-- RAW -->
+      <g text-anchor="middle">
+        <rect x="300" y="14" width="300" height="52" rx="8" fill="#EEF1F4" stroke="#94A3B8"/>
+        <text x="450" y="37" font-size="12.5" fill="#334155">raw feedyard files</text>
+        <text x="450" y="54" font-size="11.5" fill="#64748B" font-family="ui-monospace, Consolas, monospace">DataOriginal/ · SampleData/</text>
+      </g>
 
-  RAW --> ICASA
-  ICASA -->|"anonymized handoff<br/>(intentional break)"| ANON
-  ANON --> APP1
-  ANON --> APP2
-  ANON --> APP3
-  APP1 -->|deploy| H1
-  APP2 -->|deploy| H2
-  APP3 -->|deploy| H3
-  H1 -->|"AMU Metrics"| SITE
-  H2 -->|"Therapeutic Outcomes"| SITE
-  H3 -->|"Intervention Economics"| SITE
+      <!-- ICASA source -->
+      <g text-anchor="middle">
+        <rect x="280" y="104" width="340" height="52" rx="8" fill="#34495E" stroke="#26333F"/>
+        <text x="450" y="126" font-size="13" font-weight="700" fill="#FFFFFF">ICASA — source repo</text>
+        <text x="450" y="144" font-size="11.5" fill="#D8E0E8" font-family="ui-monospace, Consolas, monospace">Steps 1–5 · MasterDataProcessing.R</text>
+      </g>
 
-  subgraph DEAD ["Project folders outside the live pipeline"]
-    direction LR
-    D1["<b>ICASA_Website</b><br/>local working copy"]:::aside
-    D2["<b>ICASAFeedlotAMUReports</b><br/>earlier website draft"]:::aside
-    D3["<b>ICASA_ShinyApps</b><br/>app scaffold (in progress)"]:::aside
-  end
+      <!-- ANON engine -->
+      <g text-anchor="middle">
+        <rect x="255" y="200" width="390" height="66" rx="9" fill="#E4F1EA" stroke="#2F7D5B" stroke-width="2"/>
+        <text x="450" y="221" font-size="13" font-weight="700" fill="#123322">ICASA-anonymous — active engine</text>
+        <text x="450" y="238" font-size="11.5" fill="#1F4A34">Steps 3 &amp; 5 + CreateFilesForShiny*</text>
+        <text x="450" y="256" font-size="11.5" fill="#1F4A34" font-family="ui-monospace, Consolas, monospace">MasterDataProcessing_Anonymous.R</text>
+      </g>
 
-  classDef raw fill:#EEF1F4,stroke:#94A3B8,color:#334155,stroke-width:1px;
-  classDef source fill:#34495E,stroke:#26333F,color:#ffffff,stroke-width:1px;
-  classDef engine fill:#E4F1EA,stroke:#2F7D5B,color:#123322,stroke-width:2px;
-  classDef app fill:#FFFFFF,stroke:#34495E,color:#1F2937,stroke-width:1.5px;
-  classDef hosted fill:#E2EEF0,stroke:#3E6B75,color:#12333A,stroke-width:1.5px;
-  classDef live fill:#2F7D5B,stroke:#215C42,color:#ffffff,stroke-width:2px;
-  classDef aside fill:#EEF1F4,stroke:#94A3B8,color:#475569,stroke-width:1.3px,stroke-dasharray:5 4;
-  style DEAD fill:#F4F6F8,stroke:#94A3B8,stroke-width:1.3px,stroke-dasharray:6 5,color:#475569;
-    </pre>
+      <!-- APPS -->
+      <g text-anchor="middle">
+        <rect x="34"  y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="150" y="346" font-size="11.5" font-weight="700" fill="#1F2937">ShinyMetrics_Anonymous</text>
+        <text x="150" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app_metrics.R</text>
+
+        <rect x="334" y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="450" y="346" font-size="11.5" font-weight="700" fill="#1F2937">shinyMorbidityParameters</text>
+        <text x="450" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app3.R</text>
+
+        <rect x="634" y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="750" y="346" font-size="11.5" font-weight="700" fill="#1F2937">ShinyExportsPredict</text>
+        <text x="750" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app.R</text>
+      </g>
+
+      <!-- HOSTED -->
+      <g text-anchor="middle" font-family="ui-monospace, Consolas, monospace">
+        <rect x="45"  y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="150" y="457" font-size="12.5" fill="#12333A">ICASA_FeedlotMetrics</text>
+        <rect x="345" y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="450" y="457" font-size="12.5" fill="#12333A">ICASA_Disease</text>
+        <rect x="645" y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="750" y="457" font-size="12.5" fill="#12333A">ICASA_Econ</text>
+      </g>
+
+      <!-- SITE -->
+      <g text-anchor="middle">
+        <rect x="280" y="532" width="340" height="56" rx="9" fill="#2F7D5B" stroke="#215C42" stroke-width="2"/>
+        <text x="450" y="556" font-size="13" font-weight="700" fill="#FFFFFF">ICASAProject — website</text>
+        <text x="450" y="574" font-size="11.5" fill="#DCEFE4" font-family="ui-monospace, Consolas, monospace">index.qmd links all three</text>
+      </g>
+
+      <!-- ASIDE: outside the pipeline -->
+      <g>
+        <rect x="80" y="632" width="740" height="114" rx="12" fill="#F4F6F8" stroke="#94A3B8"
+              stroke-width="1.3" stroke-dasharray="6 5"/>
+        <text x="450" y="655" text-anchor="middle" font-size="11.5" fill="#475569">Project folders outside the live pipeline</text>
+      </g>
+      <g text-anchor="middle">
+        <rect x="100" y="672" width="200" height="52" rx="8" fill="#EEF1F4" stroke="#94A3B8" stroke-dasharray="5 4"/>
+        <text x="200" y="695" font-size="12" font-weight="700" fill="#475569">ICASA_Website</text>
+        <text x="200" y="711" font-size="10.5" fill="#64748B">local working copy</text>
+
+        <rect x="350" y="672" width="200" height="52" rx="8" fill="#EEF1F4" stroke="#94A3B8" stroke-dasharray="5 4"/>
+        <text x="450" y="695" font-size="12" font-weight="700" fill="#475569">ICASAFeedlotAMUReports</text>
+        <text x="450" y="711" font-size="10.5" fill="#64748B">earlier website draft</text>
+
+        <rect x="600" y="672" width="200" height="52" rx="8" fill="#EEF1F4" stroke="#94A3B8" stroke-dasharray="5 4"/>
+        <text x="700" y="695" font-size="12" font-weight="700" fill="#475569">ICASA_ShinyApps</text>
+        <text x="700" y="711" font-size="10.5" fill="#64748B">app scaffold (in progress)</text>
+      </g>
+    </svg>
   </div>
   <p class="dcap"><span class="swatch-arrow"></span><b>Copper arrows show the direction data moves.</b>
     The dashed box holds project folders that are not part of the live data flow.</p>
@@ -216,15 +287,5 @@ flowchart TD
     data-file name shown was taken directly from the project sources.</div>
   <footer>ICASA · Beef Feedlot Antimicrobial Use — data-flow overview</footer>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-<script>
-  window.addEventListener('load', function(){
-    if (window.mermaid) {
-      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
-      mermaid.run({ querySelector: 'pre.mermaid' });
-    }
-  });
-</script>
 </body>
 </html>
