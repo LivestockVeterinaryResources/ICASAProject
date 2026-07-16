@@ -50,3 +50,9 @@ rsconnect/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Office temp/lock files
+~$*
+
+# Quarto sub-project build caches
+presentations/.quarto/

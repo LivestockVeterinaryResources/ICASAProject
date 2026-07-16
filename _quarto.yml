@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
+    - "!presentations/"
   resources:
     - dataflow.html
 

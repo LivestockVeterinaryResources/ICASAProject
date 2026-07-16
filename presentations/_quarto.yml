@@ -1,0 +1,4 @@
+project:
+  type: default
+  render:
+    - outcomes-overview.qmd

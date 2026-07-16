@@ -1,0 +1,99 @@
+/*-- scss:defaults --*/
+// ICASA palette (matches docs/dataflow.html)
+$slate:   #34495E;
+$copper:  #C0693B;
+$ink:     #1F2937;
+$muted:   #64748B;
+$ground:  #FBFCFD;
+$border:  #D9E0E8;
+$green:   #2F7D5B;
+
+// Fonts
+$font-family-sans-serif: "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$presentation-font-size-root: 30px;
+
+// Base
+$body-bg: $ground;
+$body-color: $ink;
+$link-color: $copper;
+$selection-bg: rgba($copper, 0.25);
+
+// Headings
+$presentation-heading-font: $font-family-sans-serif;
+$presentation-heading-color: $slate;
+$presentation-heading-font-weight: 800;
+$presentation-title-slide-text-align: left;
+
+/*-- scss:rules --*/
+.reveal .slides section { text-align: left; }
+
+.reveal h1, .reveal h2 { letter-spacing: -0.01em; line-height: 1.05; }
+.reveal h2 { font-size: 1.6em; margin-bottom: 0.5em; }
+
+// Copper kicker used for eyebrow labels
+.kicker {
+  color: $copper;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.5em;
+  margin-bottom: 0.2em;
+}
+
+// Muted supporting text
+.muted { color: $muted; }
+.small { font-size: 0.72em; }
+.tiny  { font-size: 0.6em; color: $muted; }
+
+// Lead statement (big idea slides)
+.lead-stmt {
+  font-size: 1.35em;
+  font-weight: 700;
+  color: $slate;
+  line-height: 1.2;
+}
+
+// Attribution to Mike / sources
+.attrib {
+  color: $muted;
+  font-size: 0.62em;
+  font-style: italic;
+  border-left: 3px solid $copper;
+  padding-left: 0.6em;
+  margin-top: 0.6em;
+}
+
+.reveal blockquote {
+  border-left: 4px solid $copper;
+  background: rgba($slate, 0.04);
+  font-style: normal;
+  width: 100%;
+  box-shadow: none;
+}
+
+.reveal .slide-number { color: $copper; }
+
+// Two-column helper
+.cols { display: flex; gap: 0.9em; align-items: center; }
+.col  { flex: 1; }
+
+// Emphasis chips
+.chip {
+  display: inline-block;
+  font-size: 0.6em;
+  font-family: ui-monospace, Consolas, monospace;
+  background: #fff;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 1px 7px;
+  color: $ink;
+}
+
+.reveal .title-slide h1 { font-size: 2.1em; }
+.reveal figure figcaption { color: $muted; font-size: 0.6em; }
+
+// Outcome category color dots
+.k-succ { color: #2F7D5B; font-weight: 700; }
+.k-rel  { color: #D98B3A; font-weight: 700; }
+.k-sold { color: #6B8AA0; font-weight: 700; }
+.k-died { color: #9B2D30; font-weight: 700; }
