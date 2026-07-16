@@ -13,7 +13,8 @@ ICASA website/apps.
 |------|----------|
 | `OUTLINE.md` | The approved 14-slide outline + asset→slide map |
 | `outcomes-talk-plan.md` | Master plan: narrative spine, Bruce/ARG framing, audience read, format decisions |
-| `litsearch-treatment-outcomes.md` | Literature on defining treatment outcomes — human (DOOR/RADAR, stewardship metrics) + cattle (BRD FTS/CFR, PTI, mastitis "what is success"). Verified read status noted inside. |
+| `litsearch-treatment-outcomes.md` | **Round 1.** Literature on defining treatment outcomes — human (DOOR/RADAR, stewardship metrics) + cattle (BRD FTS/CFR, PTI, mastitis "what is success"). Scoped human+cattle only. Verified read status noted inside. |
+| `litsearch-round2-cross-species-regulatory.md` | **Round 2 (2026-07-16).** Deliberately breaks Round 1's scope. Slide material: DOOR's own limits (VanBuren; the Evans reply), whose-values (Finer), the US regulatory vacuum, core outcome sets. Briefing-only: swine, poultry, companion/equine, aquaculture, plant ag, One Health. **Contains a traps list and open verification gaps — read §6–7 before the podium.** |
 | `apley-mesh.md` | How Mike Apley's keynote meshes with the talk; which slides he could present as prelim |
 | `apley-deck-text.md` | Text dump of Mike's 43-slide keynote |
 | `icasa-apps.md` | The ICASA pipeline + 3 Shiny apps (Use → Outcome → Value) |

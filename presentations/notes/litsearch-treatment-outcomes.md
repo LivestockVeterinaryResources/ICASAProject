@@ -1,6 +1,13 @@
 # Lit search — how "therapeutic / treatment outcomes" for antimicrobials have been defined
 Scope per Nora: **human medicine + cattle only.** (Poultry & small-animal outcomes covered by other speakers — deliberately excluded.)
 
+> **⚠️ SUPERSEDED IN PART (2026-07-16).** Nora later asked for a cross-species + agriculture
+> sweep — see **`litsearch-round2-cross-species-regulatory.md`**. That round breaks this
+> scope, but *for briefing only*: other-species material is so she's prepared for what
+> other speakers raise, **not** for slides. Round 2 also surfaces material that stresses
+> the DOOR/RADAR framing below (VanBuren 2025: RADAR can invert the truth) and adds the
+> US regulatory-vacuum arc. Read Round 2's §5 (deck impact) and §6 (traps) alongside this.
+
 Big-picture finding: **Both human ID medicine and cattle medicine started with a single "did the bug clear / did it cure" endpoint, found it distorts interpretation, and moved toward multi-dimensional, patient-/animal-level, whole-course outcome measures.** That trajectory is the same one Nora's benchmarking work reached in production animals. Human medicine gives Nora a credible, independent precedent for "don't reduce it to one number."
 
 ---
