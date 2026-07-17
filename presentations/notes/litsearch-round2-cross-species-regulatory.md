@@ -29,6 +29,13 @@ Cambridge return 403s and can masquerade as "no evidence of X").
 Where an agent flagged a claim as unverified or soft, that flag is preserved below.
 **§7 lists the open gaps that still need closing.**
 
+> ### ⚠️ READ THIS BEFORE USING §3D
+> The one gap that mattered has been **closed, and it falsified a claim in this file.**
+> **A core outcome set for bovine respiratory disease DOES exist** — registered and
+> ongoing at Guelph (COMET 3214, Renaud/Winder, due Dec 2026). **Never say "zero core
+> outcome sets for food animals" or "our field has never done this."** The corrected,
+> safe wording is in the boxed CORRECTION in **§3D**. Everything else in §3D stands.
+
 ---
 
 ## 2. Bottom line
@@ -400,6 +407,54 @@ Soften it, or verify from a network that can reach canada.ca.
   *"The development of core outcome sets is an area in which the swine industry could
   provide leadership."*
 
+  > ### ⚠️⚠️ CORRECTION — verified 2026-07-16. **DO NOT say "zero for food animals."**
+  >
+  > **Sargeant 2023 is STALE and the "zero food-animal COS" line is FALSE.** The COMET
+  > database was reached and searched directly (the earlier fetch failure was a malformed
+  > URL, not blocking). **A core outcome set for bovine respiratory disease is registered
+  > and ongoing right now:**
+  >
+  > - **COMET study 3214** — https://www.comet-initiative.org/Studies/Details/3214
+  >   *"Protocol for the development of a core outcome set for studies of bovine
+  >   respiratory disease **diagnosis** in **pre-weaned dairy calves**."*
+  >   Katheryn Churchill; **David Renaud (PI)** and **Dr. Charlotte Winder**, University of
+  >   Guelph. **Ongoing, Jul 2024 – Dec 2026.** Funder: **Dairy Farmers of Canada.**
+  >   Methods: scoping review → interviews → two-round Delphi → consensus meeting.
+  >   First output already published: *"Evaluating case definitions of respiratory disease
+  >   in dairy calves: A scoping review,"* J Dairy Sci, Jan 2025, PII S0022-0302(25)00012-8.
+  > - **COMET study 3278** — https://www.comet-initiative.org/Studies/Details/3278
+  >   **Neonatal calf diarrhea** COS. Renaud (PI), Luiza Zakia. Ongoing Aug 2024 – Sep 2026.
+  >   Dairy Farmers of Canada. Protocol: https://hdl.handle.net/10214/28653
+  > - *Swine influenza:* Keay et al., Front Vet Sci 2025 (DOI 10.3389/fvets.2025.1465926,
+  >   PMID 40007748) is a **call for** a COS — **not** one in development.
+  >
+  > **Why Sargeant is stale:** it published in 2023; COMET 3214 registered **July 2024**.
+  > Note a Feb 2025 O'Connor paper *also* repeats "only two COS initiatives in veterinary
+  > care" — it was **already out of date when published**, so a second secondary source
+  > repeating "two" is *not* independent confirmation.
+  >
+  > **Both claimed completed vet COS verified as real:** feline CKD — Doit, Dean, Duz,
+  > Finch, Brennan, *Prev Vet Med* 2021;192:105348, **PMID 34022713**; canine atopic
+  > dermatitis (COSCAD'18) — Olivry et al., *BMC Vet Res* 2018;14(1):238, **PMID 30115047**.
+  >
+  > **THE SAFE LINE (use this):** *"There are only two **completed** core outcome sets in
+  > all of veterinary medicine — feline CKD and canine atopic dermatitis. For food animals
+  > the first ones are only now underway: Guelph has COS projects in development for BRD
+  > **diagnosis** in pre-weaned dairy calves and for neonatal calf diarrhea, both due 2026.
+  > **Nothing exists for feedlot BRD treatment outcomes.**"*
+  >
+  > That last sentence **holds** — 3214 is scoped to *diagnosis* in *dairy calves*, not
+  > treatment outcomes in feedlot cattle. And it's the better line anyway: *"the field is
+  > just starting this"* is more credible and more interesting than *"the field has never
+  > done it,"* and it lets Nora cite the in-development work as **momentum** rather than be
+  > corrected by it. **Renaud and Winder are prominent enough that a Guelph-affiliated or
+  > FDA attendee may well know about 3214.**
+  >
+  > **Honest caveat:** COMET is **not exhaustive for veterinary** — neither feline CKD nor
+  > canine AD appears in its disease vocabulary at all — and COMET keeps a separate
+  > early-stage list that is **not returned by standard search**. So absence from COMET is
+  > never evidence of absence. This cuts **against** the strong claim, never for it.
+
 **Honest caveats to voice if this is used:**
 - COS standardizes *what to measure*, not *how to summarize it* — complementary to, not a
   fix for, the composite problem.
@@ -698,6 +753,7 @@ Aquaculture can't keep a denominator; plant agriculture has no individual at all
 | "Context changed the answer" (subgroups) | **Reinforced.** Aquaculture RPS 100% vs 33% by species is the same lesson. |
 | "Where resistance fits" (Bruce bridge) | **★ Upgrade available.** UK-VARSS concedes in print that a resistant isolate does **not** necessarily correspond to clinical treatment failure — a surveillance program saying resistance ≠ outcome. |
 | (new arc, unbuilt) | "Everyone promised the outcome; nobody built the measurement" → FDA/AVMA/AABP all name outcomes → no BRD guidance, no VFD field, no surveillance program → **USDA had it in 2011 and dropped it.** |
+| (core-outcome-set slide) | ⚠️ **Must use the corrected wording** — a BRD COS exists (Guelph, COMET 3214). See the CORRECTION box in §3D and trap #8 in §6. |
 
 ---
 
@@ -716,7 +772,13 @@ Aquaculture can't keep a denominator; plant agriculture has no individual at all
 6. **Don't claim NAHMS 2021 dropped the retreatment-outcome measure** — only Part I was
    checked.
 7. **VanBuren is about RADAR, not DOOR.** DOOR alone got it right.
-8. **Conflict flag:** Schrag NFD, Godden SM, Singer RS, et al. *Front Vet Sci.*
+8. **★ NEVER say "zero core outcome sets for food animals" / "our field has never run
+   this process."** It is **false** and falsifiable in one search from the floor — a BRD
+   COS is registered and ongoing (COMET 3214, **Renaud/Winder at Guelph**, due Dec 2026),
+   plus neonatal calf diarrhea (COMET 3278). Say instead: two *completed* vet COS; food
+   animal COS *only now underway*; **nothing for feedlot BRD treatment outcomes**. See the
+   CORRECTION box in §3D. Guelph/FDA attendees may well know this work.
+9. **Conflict flag:** Schrag NFD, Godden SM, Singer RS, et al. *Front Vet Sci.*
    2022;9:1022557 (PMID 36277073) is **Nora's own first-authored paper** — the direct
    ancestor of this model (*"the cow remained in the herd and had no further TE recorded
    within 30 days"*). Cite as ancestry, **not** as independent third-party corroboration.
@@ -725,11 +787,13 @@ Aquaculture can't keep a denominator; plant agriculture has no individual at all
 
 ## 7. ⚠️ OPEN GAPS — close before the podium
 
-1. **★ Does a veterinary core outcome set already exist for BRD?** The COMET database
-   (comet-initiative.org) search page **returned an error on fetch — never checked.**
-   Sargeant 2023 says only two vet COS exist (feline CKD, canine atopic dermatitis), but
-   that's a 2023 secondary source. **A live COS for BRD would embarrass the line "our field
-   has never done this." ~10 minutes to close.**
+1. ~~**★ Does a veterinary core outcome set already exist for BRD?**~~ **✅ CLOSED
+   2026-07-16 — and the answer was YES, so the claim in §3D was FALSE.** A BRD core
+   outcome set **is registered and ongoing** (COMET 3214, Guelph — Renaud/Winder, due
+   Dec 2026), plus one for neonatal calf diarrhea (COMET 3278). **See the boxed
+   CORRECTION in §3D for the safe wording — do not say "zero for food animals" or "our
+   field has never done this."** This was exactly the gap that would have embarrassed
+   the line from the podium.
 2. **CIPARS** — canada.ca blocked every fetch. Conclusion rests on peer-reviewed methods
    papers, not the program's own methods chapter. Verify or soften.
 3. **ISCAID UTI quote** (microbiological cure "desirable but not necessarily achievable or
