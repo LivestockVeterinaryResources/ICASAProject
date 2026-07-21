@@ -30,6 +30,18 @@ project. This repo is the **canonical, live front page** of the project.
   - Antimicrobial Use Metrics → `ICASA_FeedlotMetrics`
   - Therapeutic Outcomes → `ICASA_Disease`
   - Intervention Economics → `ICASA_Econ`
+- **Which source file backs each live app** (verified 2026-07-20 by diffing the
+  deployed bundles against `ICASA-anonymous`; those folders hold many
+  near-identical scratch copies, so do not guess):
+  - `ICASA_FeedlotMetrics` → `ShinyMetrics_Anonymous/app_metrics.R`
+  - `ICASA_Disease` → `shinyMorbidityParameters/`**`app7.R`** (*not* `app3.R` —
+    `app3.R` went to the retired `ICASAMorbidityParameters` app; the data-flow
+    map said `app3.R` until it was corrected on 2026-07-20)
+  - `ICASA_Econ` → `ShinyExportsPredict/app.R`
+- `deployed_apps/` (git-ignored, ~343 MB) is a **local read-only reference** copy
+  of the deployed bundles, downloaded from shinyapps.io to verify the above. It
+  is the **old, pre-theming** code — never edit it or preview apps from it, and
+  never commit it (it holds .rds files over GitHub's 100 MB limit).
 - **Stale siblings — do not edit for the live site:** `ICASA_Website` (local, no
   git — a dead scratch copy) and `ICASAFeedlotAMUReports` (earlier website draft).
   `ICASA_ShinyApps` is an empty app scaffold (in progress).

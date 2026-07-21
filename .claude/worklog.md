@@ -10,6 +10,37 @@ Newest entry on top. Dates are absolute.
 > move the sensitive items to a private location and `git rm` them (history
 > rewrite needed to fully purge). Until then, treat everything here as world-readable.
 
+## 2026-07-20 — Corrected the data-flow map (`app3.R` → `app7.R`); ignored `deployed_apps/`
+
+**Done:**
+- Fixed the data-flow map in both `dataflow.html` and `docs/dataflow.html`: the
+  Disease app is served by **`app7.R`**, not `app3.R`. The published site had been
+  showing the wrong filename.
+- Recorded in `CLAUDE.md` exactly which source file backs each live app.
+- Added `deployed_apps/` to `.gitignore`.
+
+**Why:**
+- The `app3.R` claim was **disproved**: the deployed bundles were downloaded from
+  shinyapps.io into `deployed_apps/` and diffed against `ICASA-anonymous`. The
+  live Disease bundle matches `app7.R` (16 lines of test/deploy path-toggle drift);
+  `app3.R` differs by 283 lines and had gone to the retired
+  `ICASAMorbidityParameters` app. Metrics and Econ matched their repo files exactly.
+- `deployed_apps/` is 343 MB and contains individual `.rds` files of 180 MB and
+  137 MB — both over GitHub's 100 MB limit, so committing it would have made the
+  push fail. It is a disposable local reference, not project content.
+
+**Gotchas:**
+- `deployed_apps/` is the **pre-theming** code. Running an app from there shows the
+  old purple/lilac look — a real source of confusion. Preview from
+  `ICASA-anonymous` instead.
+- This repo's `docs/` is committed and served by Pages, so `docs/dataflow.html`
+  had to be edited alongside the root source copy (it is a Quarto `resource`).
+
+**Next:** The Shiny app work continues in `ICASA-anonymous` on branch
+`app-theming-slate-copper` (see that repo's `CLAUDE.md` / worklog). Next task
+there is fixing the app bugs. Optional here: re-theme this Quarto site from
+`pulse` (purple) to the apps' new slate+copper so the site and apps match.
+
 ## 2026-07-16 — Built "An Overview of Outcomes" talk deck
 
 **Done:**
@@ -43,7 +74,6 @@ above resistance measurement, meshing with Apley's prelim.
 
 **Next:** Clean up the public-repo exposure (see warning above). Optionally polish
 figures with real ICASA data; refresh app screenshots from the live Shiny apps.
-
 
 ## 2026-07-15 — Data-flow map + navbar link; established repo context
 

@@ -48,6 +48,11 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
+# Local read-only reference copies of the deployed Shiny app bundles, pulled
+# from shinyapps.io for comparison against ICASA-anonymous. ~343 MB and contains
+# individual .rds files over GitHub's 100 MB limit -- must never be committed.
+deployed_apps/
+
 /.quarto/
 **/*.quarto_ipynb
 
