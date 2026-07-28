@@ -1,13 +1,159 @@
 /*-- scss:defaults --*/
 
-// Sass Variables
-// https://quarto.org/docs/output-formats/html-themes.html#sass-variables
+// ICASA slate + copper -------------------------------------------------------
+// Matches `icasa_theme.R` in the ICASA-anonymous repo, which is the single
+// source of truth for the three Shiny apps. Keep these hex values identical to
+// that file so the website and the apps read as one system.
+//
+// Base is Bootswatch **flatly**, the same base the apps deploy with (was
+// `pulse`, whose purple did not belong to the palette). See _quarto.yml.
+
+$icasa-slate:  #34495E;  // primary: navbar, headings, primary buttons
+$icasa-copper: #C0693B;  // accent: links, active tab, highlights
+$icasa-green:  #2F7D5B;  // success / positive
+$icasa-teal:   #3E6B75;  // secondary
+$icasa-ground: #EEF1F4;  // panel / footer wash
+$icasa-border: #D9E0E8;  // hairline borders
+$icasa-ink:    #1F2937;  // body text
+$icasa-muted:  #64748B;  // secondary text
+
+/* Bootstrap roles */
+$primary:   $icasa-slate;
+$secondary: $icasa-teal;
+$success:   $icasa-green;
 
 /* Colors */
-$body-bg: #FFFFFF;
-$body-color: rgb(55, 58, 60);
-$link-color: rgb(39, 128, 227);
+$body-bg:          #FFFFFF;
+$body-color:       $icasa-ink;
+$link-color:       $icasa-copper;
+$link-hover-color: #8A4A2B;
 
-/* Fonts */
-$font-family-sans-serif: "Source Sans Pro", -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+/* Quarto navbar / footer -----------------------------------------------------
+   Quarto drives the navbar from these three, not from $primary. */
+$navbar-bg: $icasa-slate;
+$navbar-fg: #FFFFFF;
+$navbar-hl: $icasa-copper;
+
+$footer-bg: $icasa-ground;
+$footer-fg: $icasa-muted;
+
+/* Fonts
+   Left to Flatly (Lato), the same stack the apps get from their Flatly base.
+   Root size kept at 17px so switching themes doesn't reflow the pages. */
 $font-size-root: 17px;
+
+/* Pagination ----------------------------------------------------------------
+   Flatly sets $pagination-bg: $success and friends, so every page button is a
+   solid green block, not just the active one. Fixed at the variable level for
+   the same reason it is fixed that way in icasa_theme.R -- CSS rules on
+   `.page-item.active .page-link` alone cannot reach it. */
+$pagination-color:                 $icasa-slate;
+$pagination-bg:                    #FFFFFF;
+$pagination-border-width:          1px;
+$pagination-border-color:          $icasa-border;
+$pagination-hover-color:           #FFFFFF;
+$pagination-hover-bg:              $icasa-copper;
+$pagination-hover-border-color:    $icasa-copper;
+$pagination-focus-color:           #FFFFFF;
+$pagination-focus-bg:              $icasa-copper;
+$pagination-active-color:          #FFFFFF;
+$pagination-active-bg:             $icasa-slate;
+$pagination-active-border-color:   $icasa-slate;
+$pagination-disabled-color:        #9AA7B4;
+$pagination-disabled-bg:           #F5F7F9;
+$pagination-disabled-border-color: $icasa-border;
+
+
+/*-- scss:rules --*/
+
+/* Headings in slate, matching the apps' panel headers. */
+h1, h2, h3, h4, h5, h6,
+.quarto-title-block .title { color: #34495E; }
+
+/* Copper links in body content. The navbar, brand and buttons keep their own
+   treatment -- same exclusion list as icasa_theme.R. */
+a:not(.nav-link):not(.navbar-brand):not(.btn):not(.quarto-title-block a) {
+  color: #C0693B;
+}
+a:not(.nav-link):not(.navbar-brand):not(.btn):hover { color: #8A4A2B; }
+
+/* Navbar ---------------------------------------------------------------------
+   Flatly's _bootswatch.scss ships
+     .bg-primary .navbar-nav .nav-link.active { color: $success !important; }
+   so the Sass variables above are not enough on their own -- that rule has to
+   be beaten with !important. Active/hover go white on the slate bar with a
+   copper underline marking the current page, exactly as in the apps. */
+.navbar .navbar-nav .nav-link,
+.bg-primary .navbar-nav .nav-link        { color: rgba(255, 255, 255, 0.75) !important; }
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus,
+.navbar .navbar-nav .show > .nav-link,
+.bg-primary .navbar-nav .nav-link:hover,
+.bg-primary .navbar-nav .nav-link:focus,
+.bg-primary .navbar-nav .show > .nav-link { color: #FFFFFF !important; }
+
+.navbar .navbar-nav .nav-link.active,
+.bg-primary .navbar-nav .nav-link.active {
+  color: #FFFFFF !important;
+  border-bottom: 2px solid #C0693B;
+  font-weight: 600;
+}
+
+.navbar-brand,
+.navbar .navbar-title { display: flex; align-items: center; font-weight: 650; color: #FFFFFF; }
+
+/* Navbar tool icons (the GitHub link) */
+.navbar .quarto-navbar-tools a,
+.navbar .nav-link.quarto-navigation-tool { color: rgba(255, 255, 255, 0.85) !important; }
+.navbar .quarto-navbar-tools a:hover,
+.navbar .nav-link.quarto-navigation-tool:hover { color: #FFFFFF !important; }
+
+/* Tabs: slate by default, copper hover, copper underline when active. */
+.nav-tabs .nav-link        { color: #34495E; }
+.nav-tabs .nav-link:hover  { color: #C0693B; }
+.nav-tabs .nav-link.active {
+  color: #34495E;
+  border-bottom: 2px solid #C0693B;
+  font-weight: 600;
+}
+
+/* Buttons -- Flatly's default primary is its own blue; pin to slate, copper on
+   hover so buttons agree with the link colour. */
+.btn-primary {
+  background-color: #34495E;
+  border-color: #34495E;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #C0693B !important;
+  border-color: #C0693B !important;
+}
+
+/* index.qmd uses the `trestles` about template: its link buttons are outlined
+   primary, which would otherwise sit at Flatly's blue. */
+.about-links .about-link {
+  color: #34495E;
+  border-color: #D9E0E8;
+}
+.about-links .about-link:hover {
+  color: #C0693B;
+  border-color: #C0693B;
+}
+
+/* Inline code and blocks: neutral ground wash rather than a coloured chip. */
+code:not(.sourceCode) {
+  color: #8A4A2B;
+  background-color: #EEF1F4;
+  border: 1px solid #D9E0E8;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* Footer sits on the ground wash with a hairline above it. */
+.nav-footer {
+  border-top: 1px solid #D9E0E8;
+  color: #64748B;
+}
+.nav-footer a { color: #C0693B; }

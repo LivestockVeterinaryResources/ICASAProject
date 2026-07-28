@@ -31,7 +31,10 @@ format:
   html:
     #backgroundcolor: '#7570b3'
     #fontcolor: '#542788'
-    linkcolor: "purple"
     #mainfont: serif
-    theme: [pulse, styles.scss]
+    # Slate + copper, matching the three Shiny apps. Base is flatly -- the same
+    # Bootswatch base icasa_theme.R builds on -- with the palette applied in
+    # styles.scss. `linkcolor: purple` was removed: it emitted a hard link rule
+    # that overrode the theme.
+    theme: [flatly, styles.scss]
 
