@@ -9,7 +9,7 @@
     --slate:#34495E; --copper:#C0693B;
     --ground:#EEF1F4; --card:#FFFFFF; --card-2:#F7F9FB;
     --ink:#1F2937; --muted:#64748B; --border:#D9E0E8; --hair:#E5E9EF;
-    --live:#2F7D5B; --hosted:#3E6B75; --aside:#94A3B8;
+    --live:#2F7D5B; --hosted:#3E6B75; --aside:#94A3B8; --flag:#A63D30;
     --mono: ui-monospace,"Cascadia Code","Segoe UI Mono","SF Mono",Menlo,Consolas,monospace;
     --sans: system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -18,7 +18,7 @@
       --slate:#5B7185; --copper:#D98B63;
       --ground:#161C23; --card:#212B35; --card-2:#1A222B;
       --ink:#E5EAF0; --muted:#93A2B3; --border:#33414F; --hair:#2A3540;
-      --live:#5FBF92; --hosted:#7FB3BE; --aside:#6B7A8C;
+      --live:#5FBF92; --hosted:#7FB3BE; --aside:#6B7A8C; --flag:#E08A7C;
     }
   }
   *{box-sizing:border-box;}
@@ -40,11 +40,13 @@
   .swatch-arrow{width:22px;height:0;border-top:2px solid var(--copper);position:relative;flex:none;}
   .swatch-arrow::after{content:"";position:absolute;right:-1px;top:-4px;border:4px solid transparent;
                        border-left-color:var(--copper);}
+  .swatch-arrow.man{border-top:2px dashed var(--flag);}
+  .swatch-arrow.man::after{border-left-color:var(--flag);}
   .swatch-dash{width:20px;height:12px;border:1.5px dashed var(--aside);border-radius:3px;flex:none;}
 
   .diagram{background:#FBFCFD;border:1px solid #D9E0E8;border-radius:16px;
            padding:16px 12px;overflow-x:auto;box-shadow:0 1px 3px rgba(15,23,42,.05);}
-  .diagram svg{display:block;margin:0 auto;width:100%;min-width:660px;max-width:900px;height:auto;}
+  .diagram svg{display:block;margin:0 auto;width:100%;min-width:720px;max-width:940px;height:auto;}
   .dcap{font-size:.8rem;color:var(--muted);margin:10px 2px 30px;display:flex;
         align-items:center;gap:8px;flex-wrap:wrap;}
   .dcap b{color:var(--ink);}
@@ -59,6 +61,8 @@
   .chip{font-family:var(--mono);font-size:.75rem;background:var(--card);border:1px solid var(--border);
         border-radius:6px;padding:3px 8px;color:var(--ink);}
   .chip .a{color:var(--copper);}
+  .chip.off{border-color:var(--flag);border-style:dashed;}
+  .chip .x{color:var(--flag);font-family:var(--sans);font-size:.9em;}
 
   .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
   @media (max-width:760px){.cards3{grid-template-columns:1fr;}}
@@ -73,8 +77,17 @@
   ul.files li{font-family:var(--mono);font-size:.75rem;color:var(--ink);
               background:var(--card-2);border:1px solid var(--hair);border-radius:6px;
               padding:3px 8px;line-height:1.35;word-break:break-word;}
+  ul.files li.man{border-color:var(--flag);border-style:dashed;}
+  ul.files li .m{color:var(--flag);font-family:var(--sans);font-weight:700;}
 
-  .caveat{margin-top:30px;font-size:.8rem;color:var(--muted);background:var(--card-2);
+  .warn{margin-top:16px;font-size:.82rem;color:var(--ink);background:var(--card);
+        border:1px solid var(--flag);border-left-width:4px;border-radius:10px;padding:12px 14px;}
+  .warn h3{margin:0 0 8px;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+           color:var(--flag);font-weight:800;}
+  .warn ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--muted);}
+  .warn code{font-family:var(--mono);font-size:.92em;color:var(--ink);}
+
+  .caveat{margin-top:22px;font-size:.8rem;color:var(--muted);background:var(--card-2);
           border:1px dashed var(--border);border-radius:10px;padding:12px 14px;}
   footer{margin-top:26px;color:var(--muted);font-size:.76rem;text-align:center;}
 </style>
@@ -85,19 +98,23 @@
   <h1>Data flow map</h1>
   <p class="lede">How the numbers reach the site. Data moves in the direction of the
     <b>copper arrows</b>: raw feedyard files → the <b>ICASA</b> processing pipeline →
-    the anonymized <b>ICASA-anonymous</b> engine → three Shiny apps → three published apps on
-    shinyapps.io → the <b>ICASAProject</b> website.</p>
+    the anonymized data store <b>DataStep2_Anonymous/</b> → the <b>ICASA-anonymous</b> engine →
+    three Shiny apps → three published apps on shinyapps.io → the <b>ICASAProject</b> website.
+    <b>Red dashed arrows</b> mark the places where a file is <b>not</b> written by the pipeline and
+    has to be put in place by hand.</p>
 
   <div class="legend" aria-label="legend">
-    <span class="li"><span class="swatch-arrow"></span>data-flow direction</span>
+    <span class="li"><span class="swatch-arrow"></span>scripted — the pipeline writes it</span>
+    <span class="li"><span class="swatch-arrow man"></span>hand-placed or off-pipeline</span>
     <span class="li"><span class="dot" style="background:var(--slate)"></span>source pipeline</span>
+    <span class="li"><span class="dot" style="background:var(--aside)"></span>data at rest</span>
     <span class="li"><span class="dot" style="background:var(--live)"></span>live / current</span>
     <span class="li"><span class="dot" style="background:var(--hosted)"></span>published app</span>
   </div>
 
   <div class="diagram">
-    <svg viewBox="0 0 900 604" role="img"
-         aria-label="ICASA data flow: raw feedyard files to ICASA pipeline to ICASA-anonymous engine to three Shiny apps to three shinyapps.io apps to the ICASAProject website"
+    <svg viewBox="0 0 900 700" role="img"
+         aria-label="ICASA data flow: raw feedyard files to the ICASA pipeline, to the DataStep2_Anonymous data store, to the ICASA-anonymous engine, to three Shiny apps, to three shinyapps.io apps, to the ICASAProject website; with dashed arrows marking hand-placed inputs and the off-pipeline Predict V3 script"
          xmlns="http://www.w3.org/2000/svg"
          font-family="system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">
       <defs>
@@ -105,39 +122,62 @@
                 orient="auto" markerUnits="userSpaceOnUse">
           <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#C0693B"/>
         </marker>
+        <marker id="ahm" markerWidth="10" markerHeight="10" refX="8" refY="3.2"
+                orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#A63D30"/>
+        </marker>
       </defs>
 
-      <!-- arrows (drawn under boxes) -->
+      <!-- scripted arrows (drawn under boxes) -->
       <g stroke="#C0693B" stroke-width="2" fill="none" marker-end="url(#ah)">
         <line x1="450" y1="66"  x2="450" y2="101"/>
-        <line x1="450" y1="156" x2="450" y2="197"/>
-        <line x1="450" y1="266" x2="170" y2="319"/>
-        <line x1="450" y1="266" x2="450" y2="319"/>
-        <line x1="450" y1="266" x2="730" y2="319"/>
-        <line x1="150" y1="380" x2="150" y2="427"/>
-        <line x1="450" y1="380" x2="450" y2="427"/>
-        <line x1="750" y1="380" x2="750" y2="427"/>
-        <line x1="150" y1="474" x2="352" y2="529"/>
-        <line x1="450" y1="474" x2="450" y2="529"/>
-        <line x1="750" y1="474" x2="548" y2="529"/>
+        <line x1="450" y1="156" x2="450" y2="192"/>
+        <line x1="450" y1="258" x2="450" y2="292"/>
+        <line x1="450" y1="362" x2="150" y2="410"/>
+        <line x1="450" y1="362" x2="450" y2="410"/>
+        <line x1="645" y1="329" x2="668" y2="329"/>
+        <line x1="150" y1="476" x2="150" y2="520"/>
+        <line x1="450" y1="476" x2="450" y2="520"/>
+        <line x1="750" y1="476" x2="750" y2="520"/>
+        <line x1="150" y1="568" x2="352" y2="620"/>
+        <line x1="450" y1="568" x2="450" y2="620"/>
+        <line x1="750" y1="568" x2="548" y2="620"/>
+      </g>
+
+      <!-- hand-placed / off-pipeline arrows -->
+      <g stroke="#A63D30" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#ahm)">
+        <!-- external/deads_all.rds copied by hand into the Disease app folder -->
+        <path d="M205,258 H118 V392 H386 V406"/>
+        <!-- lots_with_dof_morb_mort_rail.rds copied by hand into the Econ app folder -->
+        <line x1="600" y1="362" x2="706" y2="406"/>
+        <!-- dashboard_payload.rds from the off-pipeline Predict script -->
+        <line x1="800" y1="362" x2="800" y2="406"/>
       </g>
 
       <!-- edge labels -->
       <g font-size="11" fill="#8A4A2B">
-        <rect x="462" y="163" width="150" height="15" fill="#FBFCFD"/>
-        <text x="466" y="174">anonymized handoff</text>
-        <rect x="462" y="179" width="150" height="15" fill="#FBFCFD"/>
-        <text x="466" y="190">(intentional break)</text>
+        <rect x="462" y="160" width="152" height="15" fill="#FBFCFD"/>
+        <text x="466" y="171">anonymized handoff</text>
+        <rect x="462" y="176" width="152" height="15" fill="#FBFCFD"/>
+        <text x="466" y="187">(intentional break)</text>
+      </g>
+      <g font-size="9.5" fill="#A63D30" text-anchor="middle">
+        <rect x="124" y="376" width="118" height="14" fill="#FBFCFD"/>
+        <text x="183" y="387">deads_all · hand copy</text>
+        <rect x="600" y="376" width="70" height="14" fill="#FBFCFD"/>
+        <text x="635" y="387">hand copy</text>
+        <rect x="806" y="376" width="86" height="14" fill="#FBFCFD"/>
+        <text x="849" y="387">off-pipeline</text>
       </g>
       <g font-size="10" fill="#8A4A2B" text-anchor="middle">
-        <rect x="128" y="396" width="44" height="15" fill="#FBFCFD"/><text x="150" y="407">deploy</text>
-        <rect x="428" y="396" width="44" height="15" fill="#FBFCFD"/><text x="450" y="407">deploy</text>
-        <rect x="728" y="396" width="44" height="15" fill="#FBFCFD"/><text x="750" y="407">deploy</text>
+        <rect x="128" y="488" width="44" height="15" fill="#FBFCFD"/><text x="150" y="499">deploy</text>
+        <rect x="428" y="488" width="44" height="15" fill="#FBFCFD"/><text x="450" y="499">deploy</text>
+        <rect x="728" y="488" width="44" height="15" fill="#FBFCFD"/><text x="750" y="499">deploy</text>
       </g>
       <g font-size="10.5" fill="#8A4A2B" text-anchor="middle">
-        <rect x="206" y="495" width="80"  height="15" fill="#FBFCFD"/><text x="246" y="506">AMU Metrics</text>
-        <rect x="386" y="483" width="128" height="15" fill="#FBFCFD"/><text x="450" y="494">Therapeutic Outcomes</text>
-        <rect x="582" y="495" width="136" height="15" fill="#FBFCFD"/><text x="650" y="506">Intervention Economics</text>
+        <rect x="206" y="592" width="80"  height="15" fill="#FBFCFD"/><text x="246" y="603">AMU Metrics</text>
+        <rect x="386" y="580" width="128" height="15" fill="#FBFCFD"/><text x="450" y="591">Therapeutic Outcomes</text>
+        <rect x="582" y="592" width="136" height="15" fill="#FBFCFD"/><text x="650" y="603">Intervention Economics</text>
       </g>
 
       <!-- RAW -->
@@ -151,52 +191,70 @@
       <g text-anchor="middle">
         <rect x="280" y="104" width="340" height="52" rx="8" fill="#34495E" stroke="#26333F"/>
         <text x="450" y="126" font-size="13" font-weight="700" fill="#FFFFFF">ICASA — source repo</text>
-        <text x="450" y="144" font-size="11.5" fill="#D8E0E8" font-family="ui-monospace, Consolas, monospace">Steps 1–5 · MasterDataProcessing.R</text>
+        <text x="450" y="144" font-size="11.5" fill="#D8E0E8" font-family="ui-monospace, Consolas, monospace">Steps 1–2 · MasterDataProcessing.R</text>
+      </g>
+
+      <!-- DataStep2 store -->
+      <g text-anchor="middle">
+        <rect x="200" y="196" width="500" height="62" rx="8" fill="#EEF1F4" stroke="#94A3B8"/>
+        <text x="450" y="216" font-size="12.5" fill="#334155">DataStep2_Anonymous/ — anonymized data store</text>
+        <text x="450" y="233" font-size="10" fill="#64748B" font-family="ui-monospace, Consolas, monospace">df_wrangle_lot_filtered · df_wrangle_treatment_filtered · df_wrangle_feed</text>
+        <text x="450" y="248" font-size="10" fill="#64748B" font-family="ui-monospace, Consolas, monospace">df_wrangle_purchases · df_wrangle_lots_filtered_with_wt_out · external/deads_all</text>
       </g>
 
       <!-- ANON engine -->
       <g text-anchor="middle">
-        <rect x="255" y="200" width="390" height="66" rx="9" fill="#E4F1EA" stroke="#2F7D5B" stroke-width="2"/>
-        <text x="450" y="221" font-size="13" font-weight="700" fill="#123322">ICASA-anonymous — active engine</text>
-        <text x="450" y="238" font-size="11.5" fill="#1F4A34">Steps 3 &amp; 5 + CreateFilesForShiny*</text>
-        <text x="450" y="256" font-size="11.5" fill="#1F4A34" font-family="ui-monospace, Consolas, monospace">MasterDataProcessing_Anonymous.R</text>
+        <rect x="255" y="296" width="390" height="66" rx="9" fill="#E4F1EA" stroke="#2F7D5B" stroke-width="2"/>
+        <text x="450" y="317" font-size="13" font-weight="700" fill="#123322">ICASA-anonymous — active engine</text>
+        <text x="450" y="334" font-size="10.5" fill="#1F4A34">Step3_Granular_003_anonymous.Rmd + CreateFilesForShinyOutcomes_V2.R</text>
+        <text x="450" y="352" font-size="11" fill="#1F4A34" font-family="ui-monospace, Consolas, monospace">MasterDataProcessing_Anonymous.R</text>
+      </g>
+
+      <!-- off-pipeline Predict script -->
+      <g text-anchor="middle">
+        <rect x="668" y="296" width="222" height="66" rx="9" fill="#FFFFFF" stroke="#A63D30"
+              stroke-width="1.5" stroke-dasharray="5 3"/>
+        <text x="779" y="317" font-size="11.5" font-weight="700" fill="#1F2937">Amrine/Predict V3.Rmd</text>
+        <text x="779" y="334" font-size="10" fill="#A63D30">not called by the master script</text>
+        <text x="779" y="352" font-size="10.5" fill="#64748B" font-family="ui-monospace, Consolas, monospace">dashboard_payload.rds</text>
       </g>
 
       <!-- APPS -->
       <g text-anchor="middle">
-        <rect x="34"  y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
-        <text x="150" y="346" font-size="11.5" font-weight="700" fill="#1F2937">ShinyMetrics_Anonymous</text>
-        <text x="150" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app_metrics.R</text>
+        <rect x="34"  y="414" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="150" y="438" font-size="11.5" font-weight="700" fill="#1F2937">ShinyMetrics_Anonymous</text>
+        <text x="150" y="456" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app_metrics.R</text>
 
-        <rect x="334" y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
-        <text x="450" y="346" font-size="11.5" font-weight="700" fill="#1F2937">shinyMorbidityParameters</text>
-        <text x="450" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app7.R</text>
+        <rect x="334" y="414" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="450" y="438" font-size="11.5" font-weight="700" fill="#1F2937">shinyMorbidityParameters</text>
+        <text x="450" y="456" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app7.R</text>
 
-        <rect x="634" y="322" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
-        <text x="750" y="346" font-size="11.5" font-weight="700" fill="#1F2937">ShinyExportsPredict</text>
-        <text x="750" y="364" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app.R</text>
+        <rect x="634" y="414" width="232" height="58" rx="8" fill="#FFFFFF" stroke="#34495E" stroke-width="1.5"/>
+        <text x="750" y="438" font-size="11.5" font-weight="700" fill="#1F2937">ShinyExportsPredict</text>
+        <text x="750" y="456" font-size="11" fill="#64748B" font-family="ui-monospace, Consolas, monospace">app.R</text>
       </g>
 
       <!-- HOSTED -->
       <g text-anchor="middle" font-family="ui-monospace, Consolas, monospace">
-        <rect x="45"  y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
-        <text x="150" y="457" font-size="12.5" fill="#12333A">ICASA_FeedlotMetrics</text>
-        <rect x="345" y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
-        <text x="450" y="457" font-size="12.5" fill="#12333A">ICASA_Disease</text>
-        <rect x="645" y="430" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
-        <text x="750" y="457" font-size="12.5" fill="#12333A">ICASA_Econ</text>
+        <rect x="45"  y="524" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="150" y="551" font-size="12.5" fill="#12333A">ICASA_FeedlotMetrics</text>
+        <rect x="345" y="524" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="450" y="551" font-size="12.5" fill="#12333A">ICASA_Disease</text>
+        <rect x="645" y="524" width="210" height="44" rx="22" fill="#E2EEF0" stroke="#3E6B75" stroke-width="1.5"/>
+        <text x="750" y="551" font-size="12.5" fill="#12333A">ICASA_Econ</text>
       </g>
 
       <!-- SITE -->
       <g text-anchor="middle">
-        <rect x="280" y="532" width="340" height="56" rx="9" fill="#2F7D5B" stroke="#215C42" stroke-width="2"/>
-        <text x="450" y="556" font-size="13" font-weight="700" fill="#FFFFFF">ICASAProject — website</text>
-        <text x="450" y="574" font-size="11.5" fill="#DCEFE4" font-family="ui-monospace, Consolas, monospace">index.qmd links all three</text>
+        <rect x="280" y="624" width="340" height="56" rx="9" fill="#2F7D5B" stroke="#215C42" stroke-width="2"/>
+        <text x="450" y="648" font-size="13" font-weight="700" fill="#FFFFFF">ICASAProject — website</text>
+        <text x="450" y="666" font-size="11.5" fill="#DCEFE4" font-family="ui-monospace, Consolas, monospace">index.qmd links all three</text>
       </g>
 
     </svg>
   </div>
-  <p class="dcap"><span class="swatch-arrow"></span><b>Copper arrows show the direction data moves.</b></p>
+  <p class="dcap"><span class="swatch-arrow"></span><b>Copper arrows show the direction data moves.</b>
+    <span class="swatch-arrow man" style="margin-left:10px"></span>Red dashed arrows are steps no script performs.</p>
 
   <h2 class="sec">Pipeline scripts, in run order</h2>
   <p class="sec-sub">The files each master script renders or sources.</p>
@@ -218,25 +276,44 @@
     <span class="chips">
       <span class="chip">Step3_Granular_003_anonymous.Rmd</span>
       <span class="chip"><span class="a">▶</span> CreateFilesForShinyOutcomes_V2.R</span>
-      <span class="chip"><span class="a">▶</span> CreateFilesForShinyOutcomesYardYearWt_notLot.R</span>
+      <span class="chip off"><span class="x">✕</span> CreateFilesForShinyOutcomesYardYearWt_notLot.R — writes nothing</span>
       <span class="chip">Step5_outcomes_anonymous.Rmd</span>
       <span class="chip">Step5_1_count_animals_anonymous.Rmd</span>
     </span>
   </div>
+  <div class="chips-row">
+    <span class="chips-lbl" style="color:var(--flag)">Off-pipeline<br>run by hand</span>
+    <span class="chips">
+      <span class="chip off"><span class="x">✕</span> Amrine/Predict V3.Rmd → dashboard_payload.rds</span>
+    </span>
+  </div>
+  <p class="sec-sub" style="margin-top:8px">
+    <b>Which script writes the app files.</b> <code style="font-family:var(--mono)">Step3_Granular_003_anonymous.Rmd</code>
+    writes the four Metrics objects (<code style="font-family:var(--mono)">master_regimens_long</code>,
+    <code style="font-family:var(--mono)">regimens_yardyear_long</code>,
+    <code style="font-family:var(--mono)">deno_yardyear_long</code>,
+    <code style="font-family:var(--mono)">df_wrangle_lot_filtered</code>) into both
+    <code style="font-family:var(--mono)">DataStep3_Anonymous/</code> and the Metrics app folder.
+    <code style="font-family:var(--mono)">CreateFilesForShinyOutcomes_V2.R</code> writes the Disease app's
+    <code style="font-family:var(--mono)">lots_for_outcomes.rds</code> and
+    <code style="font-family:var(--mono)">tx3_for_shiny.rds</code>.
+  </p>
 
   <h2 class="sec">What each app reads</h2>
-  <p class="sec-sub">Data files loaded by the deployed primary document of each app.</p>
+  <p class="sec-sub">Data files loaded by the deployed primary document of each app. Paths are as the
+    <em>deployed</em> app sees them — each app also carries a commented-out "for test" block with
+    repo-root paths, which is deliberate and not what runs on shinyapps.io.</p>
   <div class="cards3">
     <div class="card">
       <div class="repo">ShinyMetrics_Anonymous</div>
       <div class="sub">→ ICASA_FeedlotMetrics · app_metrics.R</div>
       <p class="grp-t">Reads</p>
       <ul class="files">
-        <li>df_wrangle_lot_filtered_with_wt_out.rds</li>
+        <li class="man"><span class="m">✕</span> df_wrangle_lot_filtered_with_wt_out.rds</li>
         <li>deno_yardyear_long.rds</li>
         <li>regimens_yardyear_long.rds</li>
         <li>master_regimens_long.rds</li>
-        <li>get_expected_doses.csv</li>
+        <li class="man"><span class="m">✕</span> get_expected_doses.csv</li>
       </ul>
     </div>
     <div class="card">
@@ -246,7 +323,7 @@
       <ul class="files">
         <li>data/lots_for_outcomes.rds</li>
         <li>tx3_for_shiny.rds</li>
-        <li>DataStep2_Anonymous/external/deads_all.rds</li>
+        <li class="man"><span class="m">✕</span> data/deads_all.rds</li>
       </ul>
     </div>
     <div class="card">
@@ -254,16 +331,40 @@
       <div class="sub">→ ICASA_Econ · app.R</div>
       <p class="grp-t">Reads</p>
       <ul class="files">
-        <li>data/lots_with_dof_morb_mort_rail.rds</li>
-        <li>dashboard_payload.rds</li>
+        <li class="man"><span class="m">✕</span> data/lots_with_dof_morb_mort_rail.rds</li>
+        <li class="man"><span class="m">✕</span> dashboard_payload.rds</li>
       </ul>
     </div>
   </div>
 
-  <div class="caveat">The <b>ICASA → ICASA-anonymous</b> step is an intentional break in the chain: it
-    anonymizes the original feedyard data before anything is published. Every repo, script, and
-    data-file name shown was taken directly from the project sources.</div>
-  <footer>ICASA · Beef Feedlot Antimicrobial Use — data-flow overview</footer>
+  <div class="warn">
+    <h3>✕ Inputs the pipeline does not produce</h3>
+    <ul>
+      <li><code>shinyMorbidityParameters/data/deads_all.rds</code> — a hand-anonymized one-off copied
+        from <code>DataStep2_Anonymous/external/</code>. No script writes it to the app folder, and by
+        design it is not wired into one.</li>
+      <li><code>ShinyExportsPredict/data/lots_with_dof_morb_mort_rail.rds</code> —
+        <code>CreateFilesForShinyOutcomes_V2.R</code> writes this file to
+        <code>DataStep3_Anonymous/</code> and <code>shinyLotLevelDiseaseOutcomes/</code>, never to the
+        Econ app folder. It is copied across by hand.</li>
+      <li><code>ShinyExportsPredict/dashboard_payload.rds</code> — written by
+        <code>Amrine/Predict V3.Rmd</code>, which <code>MasterDataProcessing_Anonymous.R</code> never
+        calls. Rerunning the master pipeline does <em>not</em> refresh the Econ app's predictions.</li>
+      <li><code>ShinyMetrics_Anonymous/get_expected_doses.csv</code> — no script in the repo writes it;
+        it is maintained by hand.</li>
+      <li><code>ShinyMetrics_Anonymous/df_wrangle_lot_filtered_with_wt_out.rds</code> — the pipeline
+        writes <code>df_wrangle_lot_filtered.rds</code> (no <code>_with_wt_out</code>) to this folder.
+        The file the app actually reads corresponds to
+        <code>DataStep2_Anonymous/df_wrangle_lot<b>s</b>_filtered_with_wt_out.rds</code>, copied in and
+        renamed by hand.</li>
+    </ul>
+  </div>
+
+  <div class="caveat">The <b>ICASA → DataStep2_Anonymous</b> step is an intentional break in the chain: it
+    anonymizes the original feedyard data before anything is published. Everything downstream of that
+    store — including all three apps — works only on anonymized data. Every repo, script, and data-file
+    name shown was read directly from the project sources.</div>
+  <footer>ICASA · Beef Feedlot Antimicrobial Use — data-flow overview · verified against source 2026-07-28</footer>
 </div>
 </body>
 </html>
